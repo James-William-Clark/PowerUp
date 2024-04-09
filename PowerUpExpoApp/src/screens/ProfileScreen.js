@@ -17,9 +17,16 @@ export default function ProfileScreen({ navigation }) {
 
   function loadProfileData() {
     // TODO: Backend integration!
-    setName("Fake Name");
-    setWeight(76);
-    setHeight(175.6);
+    fetch('http://192.168.1.137:3000/profiles')
+      .then(response=>response.json())
+      .then(data=> {
+        setName(data['name']);
+        setWeight(data['weight']);
+        setHeight(data['height']);
+        }
+      )
+      .catch(error=>console.log(error))
+
 
   }
 
@@ -43,7 +50,7 @@ export default function ProfileScreen({ navigation }) {
         <Text>My Profile</Text>
         <Text>Name: {name} </Text>
         <Text>Weight: {weight}kg </Text>
-        <Text>Name: {height}cm </Text>
+        <Text>Height: {height}cm </Text>
         <TextInput placeholder='Name' onChangeText={onChangeInputName} value={inputName}/>
         <TextInput placeholder='Weight' onChangeText={onChangeInputWeight} value={inputWeight}/>
         <TextInput placeholder='Height' onChangeText={onChangeInputHeight} value={inputHeight}/>
