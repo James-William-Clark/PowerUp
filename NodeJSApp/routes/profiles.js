@@ -12,6 +12,10 @@ router.get('/', (req, res) => {
     res.send(jsonContent);// this gets executed when user visits http://localhost:3000/profile
 });
 
+router.post('/', (req, res) => {
+    console.log(req.body)
+    res.send("");
+});
 
 // export the router module so that server.js file can use it
 module.exports = router;

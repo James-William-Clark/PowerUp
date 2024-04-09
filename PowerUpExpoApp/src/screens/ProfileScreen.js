@@ -31,6 +31,18 @@ export default function ProfileScreen({ navigation }) {
   }
 
   function saveProfileData() {
+    fetch('http://192.168.1.137:3000/profiles', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: inputName,
+        weight: inputWeight,
+        height: inputHeight
+      }),
+    });
     if (inputName != '') {
       setName(inputName)
     }
