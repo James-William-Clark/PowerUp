@@ -1,5 +1,5 @@
+import express from 'express';
 
-const express = require('express');
 const app = express();
 // Example defining a route in Express
 app.get('/', (req, res) => {
