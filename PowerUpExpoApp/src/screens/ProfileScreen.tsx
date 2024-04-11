@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 
-export default function ProfileScreen({ navigation }) {
+// TODO: Properly specify type
+export default function ProfileScreen({ navigation } : { navigation : any}) {
   const [name, setName] = React.useState('');
   const [weight, setWeight] = React.useState('');
   const [height, setHeight] = React.useState('');

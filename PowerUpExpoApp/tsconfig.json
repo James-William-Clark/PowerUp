@@ -1,0 +1,8 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "strict": true,
+    "types": ["react", "react-native"]
+  },
+  "extends": "expo/tsconfig.base",
+}
