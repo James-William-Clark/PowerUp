@@ -2,29 +2,27 @@ import * as React from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import ProfileScreenViewModel from './ProfileScreenViewModel';
 
-// TODO: Properly specify type
-export default function ProfileScreen({ }) {
+export default function ProfileScreenView(navigation : any) {
 
-  // TODO: Some sort of profile datastructure to condense all these methods...
-  const { name, weight, height, inputName, inputWeight, inputHeight, loadProfileData, saveProfileData, onChangeInputName, onChangeInputWeight, onChangeInputHeight} = ProfileScreenViewModel({});
+  const viewModel = new ProfileScreenViewModel();
 
   React.useEffect(() => {
-    loadProfileData();
+    viewModel.LoadProfileData();
     }, []);
 
   return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>My Profile</Text>
-        <Text>Name: {name} </Text>
-        <Text>Weight: {weight}kg </Text>
-        <Text>Height: {height}cm </Text>
-        <Text>Update my info</Text>
-        <TextInput placeholder='Name' onChangeText={onChangeInputName} value={inputName}/>
-        <TextInput placeholder='Weight' onChangeText={onChangeInputWeight} value={inputWeight}/>
-        <TextInput placeholder='Height' onChangeText={onChangeInputHeight} value={inputHeight}/>
-        <Button title="Save" onPress={saveProfileData}/>
-      </View>
-    );
-  }
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>My Profile</Text>
+      <Text>Name: {viewModel.ProfileName} </Text>
+      <Text>Weight: {viewModel.ProfileWeight}kg </Text>
+      <Text>Height: {viewModel.ProfileHeight}cm </Text>
+      <Text>Update my info</Text>
+      <TextInput placeholder='Name' onChangeText={viewModel.SetInputName} value={viewModel.InputName}/>
+      <TextInput placeholder='Weight' onChangeText={viewModel.SetInputWeight} value={viewModel.InputWeight}/>
+      <TextInput placeholder='Height' onChangeText={viewModel.SetInputHeight} value={viewModel.InputHeight}/>
+      <Button title="Save" onPress={() => viewModel.SaveProfileData()}/>
+    </View>
+  );
+}
 
   

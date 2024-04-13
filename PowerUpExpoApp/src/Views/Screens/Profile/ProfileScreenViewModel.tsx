@@ -1,57 +1,55 @@
 
 import * as React from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { AsyncStorageWrapper } from '../../../Models/Common/Data/AsyncStorageWrapper';
+import { ProfileModel } from '../../../Models/Profile/ProfileModel';
+export default class ProfileScreenViewModel {
+    ProfileName: string;
+    SetProfileName: any;
+    ProfileWeight: string;
+    SetProfileWeight: any;
+    ProfileHeight: string;
+    SetProfileHeight: any;
 
-export default function ProfileScreenViewModel({ }) {
+    InputName: string;
+    SetInputName: any;
+    InputWeight: string;
+    SetInputWeight: any;
+    InputHeight: string;
+    SetInputHeight: any;
 
-    const [name, setName] = React.useState('');
-    const [weight, setWeight] = React.useState('');
-    const [height, setHeight] = React.useState('');
+    ProfileModel: ProfileModel;
 
-    const [inputName, onChangeInputName] = React.useState('');
-    const [inputWeight, onChangeInputWeight] = React.useState('');
-    const [inputHeight, onChangeInputHeight] = React.useState('');
-
-
-    function loadProfileData() {
-    // TODO: Backend integration!
-    fetch('http://192.168.1.137:3000/profiles')
-        .then(response=>response.json())
-        .then(data=> {
-        setName(data['name']);
-        setWeight(data['weight']);
-        setHeight(data['height']);
-        }
-        )
-        .catch(error=>console.log(error))
+    constructor() {
+        // TODO: Figure out a way to inject the data source dependency globally
+        const dataSource = new AsyncStorageWrapper();
+        this.ProfileModel = new ProfileModel(dataSource);
+        [this.ProfileName, this.SetProfileName] = React.useState('');
+        [this.ProfileWeight, this.SetProfileWeight] = React.useState('');
+        [this.ProfileHeight, this.SetProfileHeight] = React.useState('');
+    
+        [this.InputName, this.SetInputName] = React.useState('');
+        [this.InputWeight, this.SetInputWeight] = React.useState('');
+        [this.InputHeight, this.SetInputHeight] = React.useState('');
     }
 
-    function saveProfileData() {
-        fetch('http://192.168.1.137:3000/profiles', {
-            method: 'POST',
-            headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-            name: inputName,
-            weight: inputWeight,
-            height: inputHeight
-            }),
-        });
-        if (inputName != '') {
-            setName(inputName)
-        }
-
-        if (inputWeight != '') {
-            setWeight(inputWeight)
-        }
-
-        if (inputHeight != '') {
-            setHeight(inputHeight)
-        }
+    async LoadProfileData() : Promise<void> {
+        var loadedProfileData = await this.ProfileModel.LoadProfileData();
+        console.log(loadedProfileData)
+        this.SetProfileName(loadedProfileData['name']);
+        this.SetProfileWeight(loadedProfileData['weight']);
+        this.SetProfileHeight(loadedProfileData['height']);
+        console.log(this.ProfileName)
     }
 
-    return {name, weight, height, inputName, inputWeight, inputHeight, loadProfileData, saveProfileData, onChangeInputName, onChangeInputWeight, onChangeInputHeight}
+    async SaveProfileData() {
+        const inputtedProfileData = {
+            "name" : this.InputName, 
+            "weight" : this.InputWeight, 
+            "height" : this.InputHeight, 
+        };
+        await this.ProfileModel.SaveProfileData(inputtedProfileData);
+        // Load the newly saved data
+        await this.LoadProfileData();
+    }
 
 }
