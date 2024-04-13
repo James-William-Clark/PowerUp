@@ -1,39 +1,55 @@
 
 import * as React from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
-import { IProfileModel } from '../../../Models/Profile/IProfileModel';
+import { AsyncStorageWrapper } from '../../../Models/Common/Data/AsyncStorageWrapper';
+import { ProfileModel } from '../../../Models/Profile/ProfileModel';
 export default class ProfileScreenViewModel {
-    ProfileModel: IProfileModel;
-    ProfileData: any;
-    SetProfileData: any;
-    InputProfileData: any;
-    SetInputProfileData: any;
+    ProfileName: string;
+    SetProfileName: any;
+    ProfileWeight: string;
+    SetProfileWeight: any;
+    ProfileHeight: string;
+    SetProfileHeight: any;
 
-    constructor(profileModel: IProfileModel ) {
-        this.ProfileModel = profileModel;
+    InputName: string;
+    SetInputName: any;
+    InputWeight: string;
+    SetInputWeight: any;
+    InputHeight: string;
+    SetInputHeight: any;
 
-        [this.ProfileData, this.SetProfileData] = React.useState({
-            name: "",
-            weight: 0,
-            height: 0
-        });
+    ProfileModel: ProfileModel;
+
+    constructor() {
+        // TODO: Figure out a way to inject the data source dependency globally
+        const dataSource = new AsyncStorageWrapper();
+        this.ProfileModel = new ProfileModel(dataSource);
+        [this.ProfileName, this.SetProfileName] = React.useState('');
+        [this.ProfileWeight, this.SetProfileWeight] = React.useState('');
+        [this.ProfileHeight, this.SetProfileHeight] = React.useState('');
     
-        [this.InputProfileData, this.SetInputProfileData] = React.useState({
-            name: "",
-            weight: 0,
-            height: 0
-        });
+        [this.InputName, this.SetInputName] = React.useState('');
+        [this.InputWeight, this.SetInputWeight] = React.useState('');
+        [this.InputHeight, this.SetInputHeight] = React.useState('');
     }
 
-    LoadProfileData() : void {
-        var loadedProfileData = this.ProfileModel.LoadProfileData();
-        this.SetProfileData['Name'](loadedProfileData['Name']);
-        this.SetProfileData['Weight'](loadedProfileData['Weight']);
-        this.SetProfileData['Height'](loadedProfileData['Height']);
+    async LoadProfileData() : Promise<void> {
+        var loadedProfileData = await this.ProfileModel.LoadProfileData();
+        console.log(loadedProfileData)
+        this.SetProfileName(loadedProfileData['name']);
+        this.SetProfileWeight(loadedProfileData['weight']);
+        this.SetProfileHeight(loadedProfileData['height']);
+        console.log(this.ProfileName)
     }
 
-    SaveProfileData() {
-        throw new Error("Not implemented exception");
+    async SaveProfileData() {
+        const inputtedProfileData = {
+            "name" : this.InputName, 
+            "weight" : this.InputWeight, 
+            "height" : this.InputHeight, 
+        };
+        await this.ProfileModel.SaveProfileData(inputtedProfileData);
+        // Load the newly saved data
+        await this.LoadProfileData();
     }
 
 }

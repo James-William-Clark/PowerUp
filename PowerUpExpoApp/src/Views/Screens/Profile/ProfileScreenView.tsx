@@ -1,36 +1,28 @@
 import * as React from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import ProfileScreenViewModel from './ProfileScreenViewModel';
-import { IProfileModel } from '../../../Models/Profile/IProfileModel';
-import { MmkvProfileModel } from '../../../Models/Profile/MmkvProfileModel';
 
+export default function ProfileScreenView(navigation : any) {
 
-// TODO: Properly specify type
-export default function ProfileScreen(navigation : any, profileModel : IProfileModel) {
+  const viewModel = new ProfileScreenViewModel();
 
-  // TODO: Figure out a way to inject the profile model dependency
+  React.useEffect(() => {
+    viewModel.LoadProfileData();
+    }, []);
 
-  const profileScreenViewModel = new ProfileScreenViewModel(profileModel);
-  const profileData = profileScreenViewModel.ProfileData;
-
-  const inputProfileData = profileScreenViewModel.InputProfileData;
-  const setInputProfileData = profileScreenViewModel.SetInputProfileData;
-
-  profileScreenViewModel.LoadProfileData();
-  
   return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>My Profile</Text>
-        <Text>Name: {profileData['Name']} </Text>
-        <Text>Weight: {profileData['Weight']}kg </Text>
-        <Text>Height: {profileData['Height']}cm </Text>
-        <Text>Update my info</Text>
-        <TextInput placeholder='Name' onChangeText={setInputProfileData['Name']} value={inputProfileData['Name']}/>
-        <TextInput placeholder='Weight' onChangeText={setInputProfileData['Weight']} value={inputProfileData['Weight']}/>
-        <TextInput placeholder='Height' onChangeText={setInputProfileData['Height']} value={inputProfileData['Height']}/>
-        <Button title="Save" onPress={profileScreenViewModel.SaveProfileData}/>
-      </View>
-    );
-  }
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>My Profile</Text>
+      <Text>Name: {viewModel.ProfileName} </Text>
+      <Text>Weight: {viewModel.ProfileWeight}kg </Text>
+      <Text>Height: {viewModel.ProfileHeight}cm </Text>
+      <Text>Update my info</Text>
+      <TextInput placeholder='Name' onChangeText={viewModel.SetInputName} value={viewModel.InputName}/>
+      <TextInput placeholder='Weight' onChangeText={viewModel.SetInputWeight} value={viewModel.InputWeight}/>
+      <TextInput placeholder='Height' onChangeText={viewModel.SetInputHeight} value={viewModel.InputHeight}/>
+      <Button title="Save" onPress={() => viewModel.SaveProfileData()}/>
+    </View>
+  );
+}
 
   
