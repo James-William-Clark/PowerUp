@@ -1,12 +1,6 @@
 # PowerUp
 A fitness tracker inspired by personal gym experiences and RPG games to track and measure strength, get motivated and optimise workout routines.
 
-Building this in React Native for cross platform support and gain experience in frameworks outside of what I use in the workplace.
+Users will earn experience points by completing workouts and making healthy life choices. Quests will be various workout challenges to motivate users to go outside their usual workout routines. For example, a user might get a weekly quest to run a total of 25km.
 
-Backend is intended to be NodeJs but features requiring a backend are low priority as I want the application to work without an internet connection.
-
-Wishlist
-- Integrate 5/3/1 progression into app
-- Allow users to implement rules based progression systems e.g. increase rep/set/weight based on meeting certain lift objectives
-- MyFitnessPal integration to have my diet tracking in the same place
-- Compare my lifting maxes to strength standards for people in the same weight class
+Experience points will increase the user's "PowerLevel" and user performance in weight lifting and cardio activities will derive their stats: strength, endurance and speed. These stats will be relative to the standards of the user's age and gender. Users will be able to select which stats they want to focus on and workout plans around that will be recommended.
