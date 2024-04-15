@@ -20,7 +20,7 @@ export default function HomeScreen({ navigation } : { navigation : any}) {
       <Button
         title="Start a new workout"
         onPress={() =>
-          navigation.navigate('Profile')
+          navigation.navigate('Workout')
         }
       />
       <Button

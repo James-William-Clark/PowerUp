@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as React from 'react';
 import HomeScreen from './src/Views/Screens/Home/HomeScreenView'
 import ProfileScreenView from './src/Views/Screens/Profile/ProfileScreenView'
+import WorkoutScreenView from './src/Views/Screens/WorkoutScreen/WorkoutScreenView';
 
 
 const Stack = createNativeStackNavigator();
@@ -15,6 +16,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Profile" component={ProfileScreenView} />
+        <Stack.Screen name="Workout" component={WorkoutScreenView} />
       </Stack.Navigator>
     </NavigationContainer>
   );
