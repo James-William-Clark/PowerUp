@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { View, Button } from 'react-native';
 
-// TODO: Properly specify type
 export default function HomeScreen({ navigation } : { navigation : any}) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -24,9 +23,9 @@ export default function HomeScreen({ navigation } : { navigation : any}) {
         }
       />
       <Button
-        title="Past Workouts"
+        title="History"
         onPress={() =>
-          navigation.navigate('Profile')
+          navigation.navigate('History')
         }
       />
     </View>
