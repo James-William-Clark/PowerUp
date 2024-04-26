@@ -7,19 +7,32 @@ import HomeScreen from './src/Views/Screens/Home/HomeScreenView'
 import ProfileScreenView from './src/Views/Screens/Profile/ProfileScreenView'
 import WorkoutScreenView from './src/Views/Screens/WorkoutScreen/WorkoutScreenView';
 import HistoryScreenView from './src/Views/Screens/History/HistoryScreenView';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
 
-
+const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreenView} />
-        <Stack.Screen name="Workout" component={WorkoutScreenView} />
-        <Stack.Screen name="History" component={HistoryScreenView} />
-      </Stack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen 
+          name="Home" component={HomeScreen} options={{tabBarIcon: () => <Ionicons name="home"/>}}
+        />
+        <Tab.Screen 
+          name="Profile" component={ProfileScreenView} 
+          options={{tabBarIcon: () => <Ionicons name="person-outline"/>}}
+        />
+        <Tab.Screen 
+          name="Workout" component={WorkoutScreenView}
+          options={{tabBarIcon: () => <Ionicons name="walk-outline"/>}}
+        />
+        <Tab.Screen 
+          name="History" component={HistoryScreenView} 
+          options={{tabBarIcon: () => <Ionicons name="book"/>}}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
