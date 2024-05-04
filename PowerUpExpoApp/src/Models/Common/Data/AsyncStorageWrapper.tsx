@@ -8,8 +8,7 @@ export class AsyncStorageWrapper implements IDataSourceWrapper {
         try {
             await AsyncStorage.setItem(key, value);
         } catch (e) {
-            // TODO: Log exception / handle better
-            console.log("Error saving: " + e)
+            console.log("The following error occurred when trying to set data " + value + " to key " + key + " :" + e);
         }   
     };
 
@@ -21,7 +20,7 @@ export class AsyncStorageWrapper implements IDataSourceWrapper {
             }
             return null;
         } catch (e) {
-            // TODO: Log exception / handle better
+            console.log("The following error occurred when trying to retrieve data " + key + " :" + e);
             return null;
         }
     };
