@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, Text, TextInput, Button, ScrollView, StyleSheet } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { PastWorkoutModalScreenView } from './PastWorkoutModalScreenView';
 
 export default function HistoryScreenView(navigation : any) {
 
@@ -10,12 +11,14 @@ export default function HistoryScreenView(navigation : any) {
             name: "Strength Training - Beginner",
             // TODO: Nice to have, dynamic date formatting. E.g. yesterday, last monday
             date_completed: "2022-11-4",
-            time_taken: "1:10"
+            time_taken: "1:10",
+            id : 1
         },
         {
             name: "Couch to 10K",
             date_completed: "2022-10-4",
-            time_taken: "0:31"
+            time_taken: "0:31",
+            id : 2
         }
       ];
 
@@ -41,6 +44,11 @@ export default function HistoryScreenView(navigation : any) {
                 <Text style={styles.workoutName}>{template.name}</Text>
                 <Text style={styles.time}>{template.date_completed}</Text>
                 <Text style={styles.xp}>{template.time_taken}</Text>
+                <Button
+                  title="View Details"
+                />
+                <PastWorkoutModalScreenView workoutId={template.id}/>
+
             </View>
             ))}
       </ScrollView>
@@ -51,6 +59,10 @@ export default function HistoryScreenView(navigation : any) {
                 <Text style={styles.workoutName}>{template.name}</Text>
                 <Text style={styles.xp}>{template.xp_reward}</Text>
                 <Text style={styles.xp}>{template.date_completed}XP</Text>
+                <Button
+                  onPress={() => navigation.navigate('PastQuest')}
+                  title="View Details"
+                />
             </View>
             ))}
       </ScrollView>
