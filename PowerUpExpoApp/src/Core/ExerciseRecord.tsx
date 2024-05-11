@@ -9,4 +9,15 @@ export class ExerciseRecord {
         this.Duration = duration;
         this.Intensity = intensity;
     }
+
+    Equals(otherExerciseRecord : ExerciseRecord) : boolean {
+        if (otherExerciseRecord.Name != otherExerciseRecord.Name)
+            return false;
+        if (otherExerciseRecord.Duration != otherExerciseRecord.Duration)
+            return false;
+        if (otherExerciseRecord.Intensity != otherExerciseRecord.Intensity)
+            return false;
+
+        return true;
+    }
 }

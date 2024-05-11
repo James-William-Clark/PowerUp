@@ -14,20 +14,34 @@ export default class PastWorkoutModalScreenViewModel {
     constructor() {
         [this.Name, this.SetName] = React.useState('');
         [this.TimeTaken, this.SetTime] = React.useState('');
-        [this.ExerciseList, this.SetExercises] = React.useState([]);
-    
+        [this.ExerciseList, this.SetExercises] = React.useState([]);    
     }
     async LoadPastWorkout(workoutId : number) : Promise<void> {
         // placeholder until saving workouts is implemented
-        if (workoutId == 1) {
+        if (workoutId == 0) {
             this.SetName("Strength Training - Beginner");
             this.SetTime("1:10")
-            this.SetExercises([new ExerciseRecord("Bench Press", "3x5", "50KG")]);
-        } else if (workoutId == 2) {
+            let preloaded = [new ExerciseRecord("Bench Press", "3x5", "50KG"), new ExerciseRecord("Squat", "5x5", "100kg")];
+            if (!this.compareExerciseRecordList(this.ExerciseList, preloaded))
+                this.SetExercises(preloaded);
+        } else if (workoutId == 1) {
             this.SetName("Couch to 10K");
             this.SetTime("0:31")
-            this.SetExercises([new ExerciseRecord("Running", "31 minutes", "9km/hr")])
+            let preloaded = [new ExerciseRecord("Running", "31 minutes", "9km/hr")];
+            if (!this.compareExerciseRecordList(this.ExerciseList, preloaded))
+                this.SetExercises(preloaded)
         }
+    }
+
+    compareExerciseRecordList(exerciseListA : ExerciseRecord[], exerciseListB : ExerciseRecord[]) : Boolean {
+        if (exerciseListA.length != exerciseListB.length)
+            return false;
+        for (let i = 0; i < exerciseListA.length; i++) {
+            if (!exerciseListA[i].Equals(exerciseListB[i])) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }
