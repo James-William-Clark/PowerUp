@@ -5,10 +5,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as React from 'react';
 import HomeScreen from './src/Views/Screens/Home/HomeScreenView'
 import ProfileScreenView from './src/Views/Screens/Profile/ProfileScreenView'
-import WorkoutScreenView from './src/Views/Screens/WorkoutScreen/WorkoutScreenView';
 import HistoryScreenView from './src/Views/Screens/History/HistoryScreenView';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import WorkoutScreenView from './src/Views/Screens/Workout/WorkoutScreenView';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
