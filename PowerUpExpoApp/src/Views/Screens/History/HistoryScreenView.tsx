@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { View, Text, TextInput, Button, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, ScrollView, StyleSheet, Modal } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { PastWorkoutModalScreenView } from './PastWorkoutModalScreenView';
+import PastWorkoutModalScreenViewModel from './PastWorkoutModalScreenViewControl';
 
 export default function HistoryScreenView(navigation : any) {
 
@@ -35,6 +36,16 @@ export default function HistoryScreenView(navigation : any) {
         }
       ];
 
+  // TODO: Move to ViewModel
+  const [modalState, setModal] = React.useState({ show: false, workoutId: 0 });
+
+  function openPastWorkoutModal(id: number) : void {
+    setModal({show: true, workoutId : id});
+  }
+  const handleClose = () => {
+    setModal({show: false, workoutId : 0});
+  };
+
   return (
     <View style={ styles.container }>
       <ScrollView>
@@ -46,12 +57,17 @@ export default function HistoryScreenView(navigation : any) {
                 <Text style={styles.xp}>{template.time_taken}</Text>
                 <Button
                   title="View Details"
+                  onPress={()=> {
+                    openPastWorkoutModal(index);
+                    }
+                  }
                 />
-                <PastWorkoutModalScreenView workoutId={template.id}/>
-
             </View>
             ))}
       </ScrollView>
+      <Modal visible={modalState.show}>
+          <PastWorkoutModalScreenView workoutId={modalState.workoutId} closeModal={handleClose}/>
+      </Modal>
       <ScrollView>
         {completedQuestsList.map((template, index) => (
             <View style={styles.row} key={index}>
@@ -60,7 +76,6 @@ export default function HistoryScreenView(navigation : any) {
                 <Text style={styles.xp}>{template.xp_reward}</Text>
                 <Text style={styles.xp}>{template.date_completed}XP</Text>
                 <Button
-                  onPress={() => navigation.navigate('PastQuest')}
                   title="View Details"
                 />
             </View>

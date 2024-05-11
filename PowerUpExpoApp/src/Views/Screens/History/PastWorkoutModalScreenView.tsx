@@ -1,30 +1,27 @@
 
-import { View, Text, Button, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, Button, ScrollView, StyleSheet, Modal } from 'react-native';
 import React, { useEffect } from 'react';
 import PastWorkoutModalScreenViewModel from './PastWorkoutModalScreenViewControl';
 
-export function PastWorkoutModalScreenView( {workoutId} : {workoutId : number}) {
-    const pastWorkoutInfo = {
-      "Name" : "Not Found",
-      "Time Taken" : "1h0m",
-      "Exercises" : [<Text>Workout could not be loaded</Text>]
-    };
-    const controller = new PastWorkoutModalScreenViewModel();
+export function PastWorkoutModalScreenView( {workoutId, closeModal} : {workoutId : number, closeModal : Function}) {
+    const viewModel = new PastWorkoutModalScreenViewModel();
     useEffect(()=> 
       {
-        controller.LoadPastWorkout(workoutId)
+        viewModel.LoadPastWorkout(workoutId)
       });
 
     return <View style={ styles.container }>
-      <Text>{pastWorkoutInfo["Name"]}</Text>
-      <ScrollView>
-        {pastWorkoutInfo["Exercises"].map((exercise, index) => (
-            <View style={styles.row} key={index}>
-                {exercise}
-            </View>
-            ))}
-      </ScrollView>
-    </View>
+        <Text>{viewModel.Name}</Text>
+        <Text>{viewModel.TimeTaken}</Text>
+        <ScrollView>
+          {viewModel.ExerciseList.map((exercise, index) => (
+              <View style={styles.row} key={index}>
+                  <Text>{exercise.Name}: {exercise.Duration} {exercise.Intensity}</Text>
+              </View>
+              ))}
+        </ScrollView>
+        <Button title='Close' onPress={() => closeModal()} />
+      </View>
   }
   // TODO: Centralise styles
   const styles = StyleSheet.create({
