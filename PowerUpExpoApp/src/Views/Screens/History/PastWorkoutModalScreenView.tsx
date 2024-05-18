@@ -16,7 +16,7 @@ export function PastWorkoutModalScreenView( {workoutId, closeModal} : {workoutId
         <ScrollView>
           {viewModel.ExerciseList.map((exercise, index) => (
               <View style={styles.row} key={index}>
-                  <Text>{exercise.Name}: {exercise.Duration} {exercise.Intensity}</Text>
+                  <Text>{exercise.Exercise.Name}: {exercise.Duration} {exercise.Intensity}</Text>
               </View>
               ))}
         </ScrollView>

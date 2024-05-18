@@ -1,6 +1,7 @@
 
 import * as React from 'react';
 import { ExerciseRecord } from '../../../Core/ExerciseRecord';
+import { StaticExerciseList } from '../../../Core/StaticExerciseList';
 
 export default class PastWorkoutModalScreenViewModel {
     // TODO: Getters/Setters
@@ -21,13 +22,13 @@ export default class PastWorkoutModalScreenViewModel {
         if (workoutId == 0) {
             this.SetName("Strength Training - Beginner");
             this.SetTime("1:10")
-            let preloaded = [new ExerciseRecord("Bench Press", "3x5", "50KG"), new ExerciseRecord("Squat", "5x5", "100kg")];
+            let preloaded = [new ExerciseRecord(StaticExerciseList.BenchPress, "3x5", "50KG"), new ExerciseRecord(StaticExerciseList.Squat, "5x5", "100kg")];
             if (!this.compareExerciseRecordList(this.ExerciseList, preloaded))
                 this.SetExercises(preloaded);
         } else if (workoutId == 1) {
             this.SetName("Couch to 10K");
             this.SetTime("0:31")
-            let preloaded = [new ExerciseRecord("Running", "31 minutes", "9km/hr")];
+            let preloaded = [new ExerciseRecord(StaticExerciseList.Running, "31 minutes", "9km/hr")];
             if (!this.compareExerciseRecordList(this.ExerciseList, preloaded))
                 this.SetExercises(preloaded)
         }
