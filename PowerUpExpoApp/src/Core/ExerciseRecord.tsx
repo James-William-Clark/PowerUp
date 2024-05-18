@@ -1,17 +1,20 @@
+import { Exercise } from './Exercise';
+
+
 export class ExerciseRecord {
-    Name : string;
+    Exercise : Exercise;
     // TODO: Duration and Intensity should be lists since people often do multiple rep ranges and different weights
     Duration: string;
     Intensity: string;
 
-    constructor(name : string, duration : string, intensity : string) {
-        this.Name = name;
+    constructor(exercise : Exercise, duration : string, intensity : string) {
+        this.Exercise = exercise;
         this.Duration = duration;
         this.Intensity = intensity;
     }
 
     Equals(otherExerciseRecord : ExerciseRecord) : boolean {
-        if (otherExerciseRecord.Name != otherExerciseRecord.Name)
+        if (otherExerciseRecord.Exercise.Name != otherExerciseRecord.Exercise.Name)
             return false;
         if (otherExerciseRecord.Duration != otherExerciseRecord.Duration)
             return false;
