@@ -2,8 +2,7 @@ import * as React from 'react';
 import { View, Text, TextInput, Button, ScrollView, StyleSheet, Modal } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { PastWorkoutModalScreenView } from './PastWorkoutModalScreenView';
-import PastWorkoutModalScreenViewModel from './PastWorkoutModalScreenViewControl';
-
+import { HistoryListStyle } from '../../../Styles/HistoryListStyle';
 export default function HistoryScreenView(navigation : any) {
 
     // TODO: Each of these should link to more information, ideally popup
@@ -47,14 +46,14 @@ export default function HistoryScreenView(navigation : any) {
   };
 
   return (
-    <View style={ styles.container }>
+    <View style={ HistoryListStyle.container }>
       <ScrollView>
         {pastWorkoutsList.map((template, index) => (
-            <View style={styles.row} key={index}>
-                <Ionicons name="american-football" size={20} color="#2F2FAF" style={styles.icon} />
-                <Text style={styles.workoutName}>{template.name}</Text>
-                <Text style={styles.time}>{template.date_completed}</Text>
-                <Text style={styles.xp}>{template.time_taken}</Text>
+            <View style={HistoryListStyle.row} key={index}>
+                <Ionicons name="american-football" size={20} color="#2F2FAF" style={HistoryListStyle.icon} />
+                <Text style={HistoryListStyle.workoutName}>{template.name}</Text>
+                <Text style={HistoryListStyle.time}>{template.date_completed}</Text>
+                <Text style={HistoryListStyle.xp}>{template.time_taken}</Text>
                 <Button
                   title="View Details"
                   onPress={()=> {
@@ -70,11 +69,11 @@ export default function HistoryScreenView(navigation : any) {
       </Modal>
       <ScrollView>
         {completedQuestsList.map((template, index) => (
-            <View style={styles.row} key={index}>
-                <Ionicons name="mail" size={20} color="#2F2F2F" style={styles.icon} />
-                <Text style={styles.workoutName}>{template.name}</Text>
-                <Text style={styles.xp}>{template.xp_reward}</Text>
-                <Text style={styles.xp}>{template.date_completed}XP</Text>
+            <View style={HistoryListStyle.row} key={index}>
+                <Ionicons name="mail" size={20} color="#2F2F2F" style={HistoryListStyle.icon} />
+                <Text style={HistoryListStyle.workoutName}>{template.name}</Text>
+                <Text style={HistoryListStyle.xp}>{template.xp_reward}</Text>
+                <Text style={HistoryListStyle.xp}>{template.date_completed}XP</Text>
                 <Button
                   title="View Details"
                 />
@@ -84,36 +83,3 @@ export default function HistoryScreenView(navigation : any) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-    container: {
-      top:0,
-      flex: 1,
-      backgroundColor: '#FFFFFF',
-    },
-    row: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      paddingVertical: 10,
-      paddingHorizontal: 20,
-      borderBottomWidth: 1,
-      borderBottomColor: '#E0E0E0',
-    },
-    icon: {
-      marginRight: 10,
-    },
-    workoutName: {
-      flex: 1,
-      fontWeight: 'bold',
-      fontSize: 16,
-      color: '#2F2F2F',
-    },
-    xp: {
-      fontSize: 16,
-      color: '#4b0082',
-    },
-    time: {
-        fontSize: 16,
-        color: '#4b0082',
-      },
-  });
