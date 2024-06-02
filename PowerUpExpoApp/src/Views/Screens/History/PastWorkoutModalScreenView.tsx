@@ -12,12 +12,18 @@ export function PastWorkoutModalScreenView( {workoutId, closeModal} : {workoutId
       });
 
     return <View style={ PastWorkoutListStyle.container }>
-        <Text>{viewModel.Name}</Text>
-        <Text>{viewModel.TimeTaken}</Text>
+        <Text>{viewModel.Name} - Duration: {viewModel.TimeTaken}</Text>
         <ScrollView>
           {viewModel.ExerciseList.map((exercise, index) => (
               <View style={PastWorkoutListStyle.row} key={index}>
-                  <Text>{exercise.Exercise.Name}: {exercise.Duration} {exercise.Intensity}</Text>
+                <Text>{exercise.Exercise.Name}</Text>
+                <ScrollView>
+                  {exercise.Sets.map((set, index) => (
+                      <View style={PastWorkoutListStyle.row} key={index}>
+                          <Text>{set.ToString()}</Text>
+                      </View>
+                      ))}
+                </ScrollView>
               </View>
               ))}
         </ScrollView>

@@ -1,25 +1,28 @@
+import { Guid } from 'guid-typescript';
 import { Exercise } from './Exercise';
+import { ExerciseSet } from './ExerciseSet';
 
 
 export class ExerciseRecord {
     Exercise : Exercise;
-    // TODO: Duration and Intensity should be lists since people often do multiple rep ranges and different weights
-    Duration: string;
-    Intensity: string;
+    Sets: ExerciseSet[];
 
-    constructor(exercise : Exercise, duration : string, intensity : string) {
+    constructor(exercise : Exercise, sets : ExerciseSet[]) {
         this.Exercise = exercise;
-        this.Duration = duration;
-        this.Intensity = intensity;
+        this.Sets = sets;
     }
 
     Equals(otherExerciseRecord : ExerciseRecord) : boolean {
-        if (otherExerciseRecord.Exercise.Name != otherExerciseRecord.Exercise.Name)
+        if (this.Exercise.Name != otherExerciseRecord.Exercise.Name)
             return false;
-        if (otherExerciseRecord.Duration != otherExerciseRecord.Duration)
+        if (otherExerciseRecord.Sets.length != this.Sets.length)
             return false;
-        if (otherExerciseRecord.Intensity != otherExerciseRecord.Intensity)
-            return false;
+        for (let i = 0; i < this.Sets.length; i++) {
+            // TODO: Hashcode
+            if (this.Sets[i].ToString() != otherExerciseRecord.Sets[i].ToString()) {
+                return false;
+            }
+        }
 
         return true;
     }

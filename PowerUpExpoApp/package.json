@@ -18,6 +18,7 @@
     "@react-navigation/native-stack": "^6.9.26",
     "expo": "^51.0.2",
     "expo-status-bar": "~1.12.1",
+    "guid-typescript": "^1.0.9",
     "react": "18.2.0",
     "react-native": "0.74.1",
     "react-native-gesture-handler": "~2.16.1",
