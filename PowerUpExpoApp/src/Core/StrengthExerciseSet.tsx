@@ -11,6 +11,10 @@ export class StrengthExerciseSet extends ExerciseSet {
     ToString(): string {
         return this.Reps + "x" + this.Weight + this.Units;
     }
+
+    ToJson(): {} {
+        return {"Weight" : this.Weight, "Reps" : this.Reps};
+    }
     Weight : number;
     Reps : number;
     Units: string;
