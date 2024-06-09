@@ -2,7 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "strict": true,
-    "types": ["react", "react-native"]
+    "types": ["react", "react-native", "jest"]
   },
   "extends": "expo/tsconfig.base",
 }
