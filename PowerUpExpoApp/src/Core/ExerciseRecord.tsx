@@ -26,4 +26,17 @@ export class ExerciseRecord {
 
         return true;
     }
+
+    ToJson() : {} {
+        var sets : {}[]= [];
+        this.Sets.forEach(element => {
+            sets.push(element.ToJson())
+        });
+        return {"Exercise" : this.Exercise.Name, "Sets" : sets};
+    }
+
+    static fromJson(json : {}) : ExerciseRecord {
+        
+        return new ExerciseRecord(new Exercise("", "", ""), [])
+    }
 }
