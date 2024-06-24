@@ -8,10 +8,10 @@ import ProfileScreenView from './src/Views/Screens/Profile/ProfileScreenView'
 import HistoryScreenView from './src/Views/Screens/History/HistoryScreenView';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import WorkoutHomeScreenView from './src/Views/Screens/Workout/WorkoutHomeScreenView';
 import WorkoutScreenView from './src/Views/Screens/Workout/WorkoutScreenView';
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
@@ -25,7 +25,7 @@ export default function App() {
           options={{tabBarIcon: () => <Ionicons name="person-outline"/>}}
         />
         <Tab.Screen 
-          name="Workout" component={WorkoutScreenView}
+          name="Workout" component={WorkoutHomeScreenView}
           options={{tabBarIcon: () => <Ionicons name="walk-outline"/>}}
         />
         <Tab.Screen 
