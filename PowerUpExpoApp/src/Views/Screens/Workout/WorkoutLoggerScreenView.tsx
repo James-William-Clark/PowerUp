@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { View, Button } from 'react-native';
 
-export default function WorkoutScreenView({templateId, closeModal} : {templateId : number, closeModal : Function}) {
+export default function WorkoutLoggerScreenView({route, navigation} : any) {
     // TODO: Load by template ID
     return (
         <View>
             <Button title="Add Exercise"/>
             <Button title="Complete Workout"/>
-            <Button title="Cancel Workout" onPress={() => closeModal()} color="#FF0000"/>
+            <Button title="Cancel Workout" onPress={() => navigation.navigate("WorkoutHomeScreen")} color="#FF0000"/>
         </View>
     );
 }
