@@ -3,42 +3,25 @@ import { View, Text, TextInput, Button, ScrollView, StyleSheet, Modal } from 're
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import WorkoutScreenView from './WorkoutScreenView';
+import WorkoutLoggerScreenView from './WorkoutLoggerScreenView';
+import ProfileScreenView from '../Profile/ProfileScreenView';
 
-export default function WorkoutHomeScreenView() {
-  // TODO: Move to ViewModel
-  const [modalState, setModal] = React.useState({ show: false, workoutId: 0 });
-
-  function openPastWorkoutModal(id: number) : void {
-    setModal({show: true, workoutId : id});
-  }
-  const handleClose = () => {
-    setModal({show: false, workoutId : 0});
-  };
-
+export default function WorkoutHomeScreenView({route, navigation} : any) {
   const workoutTemplateList = [
       {
           name: "Strength Training - Beginner",
           xp_reward: "25",
+          template_id : 1
       },
       {
           name: "Endurance Training - Advanced",
           xp_reward: "100",
+          template_id : 2
       }
     ];
 
     return (
       <View style={ styles.container }>
-        <Modal visible={modalState.show}>
-            <WorkoutScreenView closeModal={handleClose}/>
-        </Modal>
-        <Button
-          title="Quickstart"
-          onPress={()=> {
-            openPastWorkoutModal(0);
-            }
-          }
-        />
         <ScrollView>
           {workoutTemplateList.map((template, index) => (
               <View style={styles.row} key={index}>
@@ -48,8 +31,13 @@ export default function WorkoutHomeScreenView() {
               </View>
               ))}
         </ScrollView>
+        <Button
+          title="Quickstart"
+          onPress={()=> navigation.navigate("WorkoutLoggerScreen")}
+          />
       </View>
     );
+    
 }
 
 const styles = StyleSheet.create({
