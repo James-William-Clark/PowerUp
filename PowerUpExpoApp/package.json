@@ -25,6 +25,7 @@
     "guid-typescript": "^1.0.9",
     "react": "18.2.0",
     "react-native": "^0.74.2",
+    "react-native-easy-grid": "^0.2.2",
     "react-native-gesture-handler": "~2.16.1",
     "react-native-mmkv": "^2.12.2",
     "react-native-reanimated": "~3.10.1",
