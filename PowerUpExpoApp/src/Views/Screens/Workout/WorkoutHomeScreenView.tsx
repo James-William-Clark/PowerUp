@@ -1,10 +1,6 @@
 import * as React from 'react';
-import { View, Text, TextInput, Button, ScrollView, StyleSheet, Modal } from 'react-native';
+import { View, Text, Button, ScrollView, StyleSheet, Modal } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import WorkoutLoggerScreenView from './WorkoutLoggerScreenView';
-import ProfileScreenView from '../Profile/ProfileScreenView';
 
 export default function WorkoutHomeScreenView({route, navigation} : any) {
   const workoutTemplateList = [
