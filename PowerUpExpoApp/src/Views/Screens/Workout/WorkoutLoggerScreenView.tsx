@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Button, StyleSheet, Text, ScrollView, TextInput } from 'react-native';
+import { View, Button, StyleSheet, Text, ScrollView, TextInput, Alert } from 'react-native';
 import { StaticExerciseList } from '../../../Core/StaticExerciseList';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { Exercise } from '../../../Core/Exercise';
@@ -31,8 +31,6 @@ export default function WorkoutLoggerScreenView({route, navigation} : any) {
         setLogList(logList = logList.concat());
     }
 
-
-
     function deleteSet(set: { reps: number; weight: number; }, exerciseIndex : number): void {
         const newList = logList.map((exerciseLog, i) => {
             if (i === exerciseIndex) {
@@ -41,6 +39,38 @@ export default function WorkoutLoggerScreenView({route, navigation} : any) {
             return {exercise : exerciseLog.exercise, sets : exerciseLog.sets};
         });
         setLogList(newList);
+    }
+
+    function cancelAlert() {
+        Alert.alert(
+            'Are you sure you want to cancel workout?',
+            '',
+            [
+                {
+                    text:"Quit",
+                    onPress: () => navigation.goBack()
+                },
+                {
+                    text:"Continue",
+                }
+            ]
+        )
+    }
+
+    function completeWorkoutAlert() {
+        Alert.alert(
+            'Save and Finish Workout?',
+            '',
+            [
+                {
+                    text:"Yes",
+                    onPress: () => navigation.goBack() // TODO: Also save to DB
+                },
+                {
+                    text:"Continue",
+                }
+            ]
+        )
     }
 
     return (
@@ -69,11 +99,8 @@ export default function WorkoutLoggerScreenView({route, navigation} : any) {
                     ))}
             </ScrollView>
             <Button title="Add Exercise" onPress={() => navigation.navigate("AddExerciseView")} color="#00FF00"/>
-            <Button title="Complete Workout" 
-                onPress={() => {
-                    navigation.goBack(); // TODO: Save workout to local storage
-            }} color="#0000FF"/>
-            <Button title="Cancel Workout" onPress={() => navigation.goBack()} color="#FF0000"/>
+            <Button title="Complete Workout" onPress={completeWorkoutAlert} color="#0000FF"/>
+            <Button title="Cancel Workout" onPress={cancelAlert} color="#FF0000"/>
         </View>
     );
 
