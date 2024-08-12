@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { View, StyleSheet, ScrollView, Text, Button } from 'react-native';
+import { StaticExerciseList } from '../../../Core/StaticExerciseList';
 
 export default function AddExerciseView({route, navigation} : any) {
     const exercises = [
-        {name : "Squat"}
+        StaticExerciseList.Squat
     ]
     return (
         <View>
             <ScrollView>
                 {exercises.map((exercise, index) => (
                     <View key={index}>
-                        <Text style={styles.row}>{exercise.name}</Text>
+                        <Text style={styles.row}>{exercise.Name}</Text>
                         <Button onPress = {() => {navigation.navigate("WorkoutLoggerScreen", { exercise : exercise })}} title="Add"/>
                   </View>
                 ))}

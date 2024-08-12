@@ -15,15 +15,19 @@ const exerciseLogListPlaceholder = [
 ]
 
 export default function WorkoutLoggerScreenView({route, navigation} : any) {
-    React.useEffect(() => {
-        if (route.params?.exercise) {
-          console.log(route.params.exercise)
-        }
-      }, [route.params?.exercise]);
-    
+
     // TODO: Load by template ID
 
     const [logList, setLogList] = React.useState(exerciseLogListPlaceholder)
+
+    React.useEffect(() => {
+        if (route.params?.exercise) {
+          console.log(route.params.exercise);
+          const newLogList = [...logList, {exercise: route.params.exercise, sets : [{reps : 0, weight : 0}]}]
+          setLogList(newLogList);
+        }
+      }, [route.params?.exercise]);
+    
 
     function addSet(logList: { exercise: Exercise; sets: { reps: number; weight: number; }[]; }[], log: { exercise: Exercise; sets: { reps: number; weight: number; }[]; }): void {
         log.sets = log.sets.concat([{reps : 0, weight : 0}])
@@ -34,10 +38,11 @@ export default function WorkoutLoggerScreenView({route, navigation} : any) {
     function deleteSet(set: { reps: number; weight: number; }, exerciseIndex : number): void {
         const newList = logList.map((exerciseLog, i) => {
             if (i === exerciseIndex) {
-               return {exercise : exerciseLog.exercise, sets : exerciseLog.sets.filter(s => s !== set)};
+                return {exercise : exerciseLog.exercise, sets : exerciseLog.sets.filter(s => s !== set)};
             }
             return {exercise : exerciseLog.exercise, sets : exerciseLog.sets};
-        });
+        }).filter((exerciseLog) => exerciseLog.sets.length > 0);
+
         setLogList(newList);
     }
 
