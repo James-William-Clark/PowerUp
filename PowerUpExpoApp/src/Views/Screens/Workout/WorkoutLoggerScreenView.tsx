@@ -22,9 +22,12 @@ export default function WorkoutLoggerScreenView({route, navigation} : any) {
 
     React.useEffect(() => {
         if (route.params?.exercise) {
-          console.log(route.params.exercise);
-          const newLogList = [...logList, {exercise: route.params.exercise, sets : [{reps : 0, weight : 0}]}]
-          setLogList(newLogList);
+            const exerciseToAdd = route.params.exercise;
+            if (logList.find((record) => record.exercise == exerciseToAdd)) {
+                return;
+            }
+            const newLogList = [...logList, {exercise: exerciseToAdd, sets : [{reps : 0, weight : 0}]}]
+            setLogList(newLogList);
         }
       }, [route.params?.exercise]);
     
