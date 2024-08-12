@@ -8,4 +8,5 @@ export class StaticExerciseList {
     static OverheadPress = new Exercise("Overhead Press", "TODO", "Strength");
     static Running = new Exercise("Running", "TODO", "Cardio");
 
+    static AllBuiltInExercises = [this.BenchPress, this.Squat, this.Deadlift, this.OverheadPress, this.Running]
 }

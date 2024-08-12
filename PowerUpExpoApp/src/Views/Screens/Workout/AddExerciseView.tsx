@@ -3,9 +3,8 @@ import { View, StyleSheet, ScrollView, Text, Button } from 'react-native';
 import { StaticExerciseList } from '../../../Core/StaticExerciseList';
 
 export default function AddExerciseView({route, navigation} : any) {
-    const exercises = [
-        StaticExerciseList.Squat
-    ]
+    const exercises = StaticExerciseList.AllBuiltInExercises
+    // TODO: Load in user added exercises
     return (
         <View>
             <ScrollView>
