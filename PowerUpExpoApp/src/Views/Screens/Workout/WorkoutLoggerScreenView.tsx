@@ -4,51 +4,26 @@ import { StaticExerciseList } from '../../../Core/StaticExerciseList';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { Exercise } from '../../../Core/Exercise';
 import { Swipeable } from 'react-native-gesture-handler';
-
-const exerciseLogListPlaceholder = [
-    {
-        exercise : StaticExerciseList.BenchPress, sets : [{reps : 5, weight: 50}, {reps : 3, weight : 60}],
-    },
-    {
-        exercise : StaticExerciseList.Deadlift, sets : [{reps : 3, weight: 75}, {reps : 3, weight : 90}],
-    },
-]
+import WorkoutLoggerScreenViewModel from './WorkoutLoggerScreenViewModel';
 
 export default function WorkoutLoggerScreenView({route, navigation} : any) {
 
-    // TODO: Load by template ID
-
-    const [logList, setLogList] = React.useState(exerciseLogListPlaceholder)
+    const viewModel = new WorkoutLoggerScreenViewModel();
 
     React.useEffect(() => {
         if (route.params?.exercise) {
             const exerciseToAdd = route.params.exercise;
-            if (logList.find((record) => record.exercise == exerciseToAdd)) {
-                return;
-            }
-            const newLogList = [...logList, {exercise: exerciseToAdd, sets : [{reps : 0, weight : 0}]}]
-            setLogList(newLogList);
+            viewModel.addExercise(exerciseToAdd);
         }
       }, [route.params?.exercise]);
+
+      React.useEffect(() => {
+        if (route.params?.templateId) {
+            const templateId = route.params.templateId;
+            viewModel.loadWorkout(templateId);
+        }
+      }, [route.params?.templateId]);
     
-
-    function addSet(logList: { exercise: Exercise; sets: { reps: number; weight: number; }[]; }[], log: { exercise: Exercise; sets: { reps: number; weight: number; }[]; }): void {
-        log.sets = log.sets.concat([{reps : 0, weight : 0}])
-        // TODO: Cleaner way to do this surely
-        setLogList(logList = logList.concat());
-    }
-
-    function deleteSet(set: { reps: number; weight: number; }, exerciseIndex : number): void {
-        const newList = logList.map((exerciseLog, i) => {
-            if (i === exerciseIndex) {
-                return {exercise : exerciseLog.exercise, sets : exerciseLog.sets.filter(s => s !== set)};
-            }
-            return {exercise : exerciseLog.exercise, sets : exerciseLog.sets};
-        }).filter((exerciseLog) => exerciseLog.sets.length > 0);
-
-        setLogList(newList);
-    }
-
     function cancelAlert() {
         Alert.alert(
             'Are you sure you want to cancel workout?',
@@ -84,7 +59,7 @@ export default function WorkoutLoggerScreenView({route, navigation} : any) {
     return (
         <View>
             <ScrollView>
-                {logList.map((log, index) => (
+                {viewModel.logList.map((log, index) => (
                     <View style={styles.row} key={index}>
                         <Text style={styles.workoutName}>{log.exercise.Name}</Text>
                         <ScrollView>
@@ -97,10 +72,10 @@ export default function WorkoutLoggerScreenView({route, navigation} : any) {
                                     <Row key={setIndex}>
                                         <TextInput defaultValue={set.reps.toString()}></TextInput>
                                         <TextInput defaultValue={set.weight.toString()}></TextInput>
-                                        <Button title='X' onPress={() => deleteSet(set, index)} color={"#FF0000"} /* TODO  replace with swipe to delete*//>
+                                        <Button title='X' onPress={() => viewModel.deleteSet(set, index)} color={"#FF0000"} /* TODO  replace with swipe to delete*//>
                                     </Row>
                                 ))}
-                                <Button title='Add' onPress={() => addSet(logList, log)}/>
+                                <Button title='Add' onPress={() => viewModel.addSet(log)}/>
                             </Grid>
                         </ScrollView>
                     </View>

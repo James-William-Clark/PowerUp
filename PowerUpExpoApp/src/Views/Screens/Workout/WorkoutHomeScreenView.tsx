@@ -7,12 +7,12 @@ export default function WorkoutHomeScreenView({route, navigation} : any) {
       {
           name: "Strength Training - Beginner",
           xp_reward: "25",
-          template_id : 1
+          templateId : 1
       },
       {
           name: "Endurance Training - Advanced",
           xp_reward: "100",
-          template_id : 2
+          templateId : 2
       }
     ];
 
@@ -21,7 +21,8 @@ export default function WorkoutHomeScreenView({route, navigation} : any) {
         <ScrollView>
           {workoutTemplateList.map((template, index) => (
               <View style={styles.row} key={index}>
-                  <Ionicons name="mail" size={20} color="#2F2F2F" style={styles.icon} />
+                  <Ionicons name="add-circle" size={20} color="#008000" 
+                    style={styles.icon} onPress={()=> navigation.navigate("WorkoutLoggerScreen", {templateId : template.templateId})}/>
                   <Text style={styles.workoutName}>{template.name}</Text>
                   <Text style={styles.xp}>{template.xp_reward}XP</Text>
               </View>
