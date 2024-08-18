@@ -26,27 +26,13 @@ export default class WorkoutModalScreenViewModel {
             this.SetTime("1:10")
             let setList = [new StrengthExerciseSet(10, 10), new StrengthExerciseSet(5, 20), new StrengthExerciseSet(5, 30)]
             let preloaded = [new ExerciseRecord(StaticExerciseList.BenchPress, setList), new ExerciseRecord(StaticExerciseList.Squat, setList)];
-            if (!this.compareExerciseRecordList(this.ExerciseList, preloaded))
-                this.SetExercises(preloaded);
+            this.SetExercises(preloaded);
         } else if (workoutId == 2) {
             this.SetName("Couch to 10K");
             this.SetTime("5:01")
             let setList = [new SpeedExerciseSet(10, "5:01")]
             let preloaded = [new ExerciseRecord(StaticExerciseList.Running, setList)];
-            if (!this.compareExerciseRecordList(this.ExerciseList, preloaded))
-                this.SetExercises(preloaded)
+            this.SetExercises(preloaded)
         }
     }
-
-    compareExerciseRecordList(exerciseListA : ExerciseRecord[], exerciseListB : ExerciseRecord[]) : Boolean {
-        if (exerciseListA.length != exerciseListB.length)
-            return false;
-        for (let i = 0; i < exerciseListA.length; i++) {
-            if (!exerciseListA[i].Equals(exerciseListB[i])) {
-                return false;
-            }
-        }
-        return true;
-    }
-
 }
