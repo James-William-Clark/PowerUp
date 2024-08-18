@@ -9,7 +9,7 @@ export default function HistoryStackNavigator() {
       return (
         <Stack.Navigator screenOptions={{headerShown:false}}>
           <Stack.Screen name="HistoryHomeScreen" component={HistoryHomeScreenView} />
-          <Stack.Screen name="WorkoutInformationsScreen" component={WorkoutInformationScreenView} />
+          <Stack.Screen name="WorkoutInformationScreen" component={WorkoutInformationScreenView} />
         </Stack.Navigator>
   
       );
