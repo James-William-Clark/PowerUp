@@ -34,11 +34,9 @@ export default class ProfileScreenViewModel {
 
     async LoadProfileData() : Promise<void> {
         var loadedProfileData = await this.ProfileModel.LoadProfileData();
-        console.log(loadedProfileData)
         this.SetProfileName(loadedProfileData['name']);
         this.SetProfileWeight(loadedProfileData['weight']);
         this.SetProfileHeight(loadedProfileData['height']);
-        console.log(this.ProfileName)
     }
 
     async SaveProfileData() {
