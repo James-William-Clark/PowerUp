@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, Text, Button, ScrollView } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { HistoryListStyle } from '../../../Styles/HistoryListStyle';
-export default function HistoryScreenView({route, navigation} : any) {
+export default function HistoryHomeScreenView({route, navigation} : any) {
 
     // TODO: Each of these should link to more information, ideally popup
     const pastWorkoutsList = [
@@ -45,7 +45,7 @@ export default function HistoryScreenView({route, navigation} : any) {
                 <Text style={HistoryListStyle.xp}>{template.time_taken}</Text>
                 <Button
                   title="View Details"
-                  onPress={()=> navigation.navigate("WorkoutInformation", {workoutId : template.id})}
+                  onPress={()=> navigation.navigate("WorkoutInformationScreen", {workoutId : template.id})}
                 />
             </View>
             ))}

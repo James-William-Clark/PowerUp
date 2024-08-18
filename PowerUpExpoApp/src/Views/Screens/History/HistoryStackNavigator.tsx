@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { WorkoutInformationScreenView as WorkoutInformationScreenView } from "./WorkoutInformationScreenView";
-import HistoryScreenView from "./HistoryScreenView";
+import HistoryHomeScreenView from "./HistoryScreenView";
 
 export default function HistoryStackNavigator() {
 
@@ -8,8 +8,8 @@ export default function HistoryStackNavigator() {
   
       return (
         <Stack.Navigator screenOptions={{headerShown:false}}>
-          <Stack.Screen name="History" component={HistoryScreenView} />
-          <Stack.Screen name="WorkoutInformation" component={WorkoutInformationScreenView} />
+          <Stack.Screen name="HistoryHomeScreen" component={HistoryHomeScreenView} />
+          <Stack.Screen name="WorkoutInformationsScreen" component={WorkoutInformationScreenView} />
         </Stack.Navigator>
   
       );
