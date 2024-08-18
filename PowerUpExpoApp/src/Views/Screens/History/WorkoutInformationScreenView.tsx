@@ -1,15 +1,19 @@
 
 import { View, Text, Button, ScrollView, StyleSheet, Modal } from 'react-native';
 import React, { useEffect } from 'react';
-import PastWorkoutModalScreenViewModel from './PastWorkoutModalScreenViewControl';
+import WorkoutModalScreenViewModel from './WorkoutInformationScreenViewControl';
 import { PastWorkoutListStyle } from '../../../Styles/PastWorkoutListStyle';
 
-export function PastWorkoutModalScreenView( {workoutId, closeModal} : {workoutId : number, closeModal : Function}) {
-    const viewModel = new PastWorkoutModalScreenViewModel();
-    useEffect(()=> 
-      {
-        viewModel.LoadPastWorkout(workoutId)
-      });
+export function WorkoutInformationScreenView({route, navigation} : any) {
+    const viewModel = new WorkoutModalScreenViewModel();
+
+    React.useEffect(() => {
+        if (route.params?.workoutId) {
+            const workoutToLoad = route.params.workoutId;
+            viewModel.LoadPastWorkout(workoutToLoad);
+        }
+      }, [route.params?.exercise]);
+    
 
     return <View style={ PastWorkoutListStyle.container }>
         <Text>{viewModel.Name} - Duration: {viewModel.TimeTaken}</Text>
@@ -27,6 +31,6 @@ export function PastWorkoutModalScreenView( {workoutId, closeModal} : {workoutId
               </View>
               ))}
         </ScrollView>
-        <Button title='Close' onPress={() => closeModal()} />
+        <Button title='Close' onPress={() => navigation.goBack()} />
       </View>
   }
