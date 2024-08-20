@@ -5,6 +5,7 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import { Exercise } from '../../../Core/Exercise';
 import { Swipeable } from 'react-native-gesture-handler';
 import WorkoutLoggerScreenViewModel from './WorkoutLoggerScreenViewModel';
+import WorkoutTimerView from './WorkoutTimerView';
 
 export default function WorkoutLoggerScreenView({route, navigation} : any) {
 
@@ -26,6 +27,7 @@ export default function WorkoutLoggerScreenView({route, navigation} : any) {
 
     return (
         <View>
+            <WorkoutTimerView></WorkoutTimerView>
             <ScrollView>
                 {viewModel.logList.map((log, index) => (
                     <View style={styles.row} key={index}>
