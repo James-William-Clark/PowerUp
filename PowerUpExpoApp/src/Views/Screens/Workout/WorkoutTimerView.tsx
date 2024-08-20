@@ -11,12 +11,19 @@ export default function WorkoutTimerView() {
         intervalRef.current = setInterval(() => {
             setTime(Math.floor((Date.now() - 
             startTimeRef.current) / 1000));
-        }, 1000);
+        }, 10);
     });
+
+    function formatTime(time : number) {
+        var hours = Math.floor(time / 3600);
+        var minutes = Math.floor(time % 3600 / 60);
+        var seconds = Math.floor(time % 3600 % 60);
+        return `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds}`
+    }
 
     return (
         <View>
-            <Text>Time elapsed: {time}</Text>
+            <Text>Time elapsed: {formatTime(time)}</Text>
         </View>
     )
 }
