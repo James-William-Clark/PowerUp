@@ -17,44 +17,12 @@ export default function WorkoutLoggerScreenView({route, navigation} : any) {
         }
       }, [route.params?.exercise]);
 
-      React.useEffect(() => {
-        if (route.params?.templateId) {
-            const templateId = route.params.templateId;
-            viewModel.loadWorkout(templateId);
-        }
-      }, [route.params?.templateId]);
-    
-    function cancelAlert() {
-        Alert.alert(
-            'Are you sure you want to cancel workout?',
-            '',
-            [
-                {
-                    text:"Quit",
-                    onPress: () => navigation.goBack()
-                },
-                {
-                    text:"Continue",
-                }
-            ]
-        )
+    React.useEffect(() => {
+    if (route.params?.templateId) {
+        const templateId = route.params.templateId;
+        viewModel.loadWorkout(templateId);
     }
-
-    function completeWorkoutAlert() {
-        Alert.alert(
-            'Save and Finish Workout?',
-            '',
-            [
-                {
-                    text:"Yes",
-                    onPress: () => navigation.goBack() // TODO: Also save to DB
-                },
-                {
-                    text:"Continue",
-                }
-            ]
-        )
-    }
+    }, [route.params?.templateId]);
 
     return (
         <View>
@@ -86,7 +54,37 @@ export default function WorkoutLoggerScreenView({route, navigation} : any) {
             <Button title="Cancel Workout" onPress={cancelAlert} color="#FF0000"/>
         </View>
     );
+    function cancelAlert() {
+        Alert.alert(
+            'Are you sure you want to cancel workout?',
+            '',
+            [
+                {
+                    text:"Quit",
+                    onPress: () => navigation.goBack()
+                },
+                {
+                    text:"Continue",
+                }
+            ]
+        )
+    }
 
+    function completeWorkoutAlert() {
+        Alert.alert(
+            'Save and Finish Workout?',
+            '',
+            [
+                {
+                    text:"Yes",
+                    onPress: () => navigation.goBack() // TODO: Also save to DB
+                },
+                {
+                    text:"Continue",
+                }
+            ]
+        )
+    }
 }
 
 const styles = StyleSheet.create({
